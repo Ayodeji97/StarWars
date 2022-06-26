@@ -1,23 +1,19 @@
 package com.financials.starwars.business.utils.mapper.remotemapper
 
+import com.financials.starwars.business.datasource.cache.model.CharacterDetailEntity
 import com.financials.starwars.business.datasource.remote.model.CharacterDto
 import com.financials.starwars.business.domain.model.Character
 import com.financials.starwars.business.utils.mapper.base.BaseDtoMapper
+import javax.inject.Inject
 
-class CharacterDtoMapper : BaseDtoMapper<CharacterDto, Character> {
-    override fun transformToDomain(type: CharacterDto): Character =
-        Character(
-            name = type.name,
-            birthYear = type.birthYear,
-            height = type.height,
-            url = type.url
-        )
-
-    override fun transformToDto(type: Character): CharacterDto =
-        CharacterDto(
-            name = type.name,
-            birthYear = type.birthYear,
-            height = type.height,
-            url = type.url
-        )
+class CharacterDtoMapper @Inject constructor() : BaseDtoMapper<List<CharacterDto>, List<Character>> {
+    override fun transformToDomain(type: List<CharacterDto>): List<Character> =
+        type.map { characterDto ->
+            Character(
+                name = characterDto.name,
+                birthYear = characterDto.birthYear,
+                height = characterDto.height,
+                url = characterDto.url
+            )
+        }
 }

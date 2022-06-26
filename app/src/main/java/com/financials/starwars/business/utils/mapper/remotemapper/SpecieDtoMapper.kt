@@ -11,11 +11,4 @@ class SpecieDtoMapper : BaseDtoMapper<SpecieDto, Specie> {
             homeWorld = type.homeWorld,
             language = type.language
         )
-
-    override fun transformToDto(type: Specie): SpecieDto =
-        SpecieDto(
-            name = type.name,
-            homeWorld = type.homeWorld,
-            language = type.language
-        )
 }

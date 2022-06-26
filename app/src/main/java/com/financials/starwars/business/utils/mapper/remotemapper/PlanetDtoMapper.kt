@@ -11,9 +11,4 @@ class PlanetDtoMapper : BaseDtoMapper<PlanetDto, Planet> {
             population = type.population
         )
 
-    override fun transformToDto(type: Planet): PlanetDto =
-        PlanetDto(
-            name = type.name,
-            population = type.population
-        )
 }

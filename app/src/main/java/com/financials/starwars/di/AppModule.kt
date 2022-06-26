@@ -1,10 +1,14 @@
 package com.financials.starwars.di
 
 import com.financials.starwars.BuildConfig
+import com.financials.starwars.business.datasource.remote.StarWarsService
 import com.financials.starwars.business.utils.Constants.BASE_URL
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -12,6 +16,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
+@Module
+@InstallIn(SingletonComponent::class)
 object AppModule {
 
     @Singleton
@@ -51,6 +57,11 @@ object AppModule {
             .addConverterFactory(GsonConverterFactory.create(gsonBuilder))
     }
 
-
-
+    @Singleton
+    @Provides
+    fun provideStarWarsApiService(retrofitBuilder: Retrofit.Builder): StarWarsService {
+        return retrofitBuilder
+            .build()
+            .create(StarWarsService::class.java)
+    }
 }

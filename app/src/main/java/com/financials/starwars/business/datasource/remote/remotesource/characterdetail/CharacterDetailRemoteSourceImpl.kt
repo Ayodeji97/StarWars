@@ -1,14 +1,11 @@
-package com.financials.starwars.business.datasource.remote.remotesource
+package com.financials.starwars.business.datasource.remote.remotesource.characterdetail
 
 import com.financials.starwars.business.datasource.remote.StarWarsService
 import com.financials.starwars.business.datasource.remote.model.CharacterDto
 import com.financials.starwars.business.datasource.remote.model.FilmDto
 import com.financials.starwars.business.datasource.remote.model.PlanetDto
 import com.financials.starwars.business.datasource.remote.model.SpecieDto
-import com.financials.starwars.business.datasource.remote.response.CharacterResponse
-import com.financials.starwars.business.datasource.remote.response.FilmResponse
-import com.financials.starwars.business.datasource.remote.response.PlanetResponse
-import com.financials.starwars.business.datasource.remote.response.SpecieResponse
+import com.financials.starwars.business.datasource.remote.remotesource.characterdetail.CharacterDetailRemoteSource
 import com.financials.starwars.business.utils.Result
 import com.financials.starwars.di.dispatcher.IoDispatcher
 import kotlinx.coroutines.CoroutineDispatcher
@@ -21,7 +18,7 @@ class CharacterDetailRemoteSourceImpl @Inject constructor(
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher
 ) : CharacterDetailRemoteSource {
 
-    override suspend fun getCharacter(characterUrl: String): Result<CharacterResponse> =
+    override suspend fun getCharacter(characterUrl: String): Result<CharacterDto> =
         withContext(ioDispatcher) {
             return@withContext try {
                 val apiResponse = starWarsService.getCharacterDetail(characterUrl)
@@ -37,15 +34,15 @@ class CharacterDetailRemoteSourceImpl @Inject constructor(
 
         }
 
-    override suspend fun getPlanet(planetUrl: String): Result<PlanetResponse> {
+    override suspend fun getPlanet(planetUrl: String): Result<PlanetDto> {
         TODO("Not yet implemented")
     }
 
-    override suspend fun getSpecie(specieUrl: String): Result<SpecieResponse> {
+    override suspend fun getSpecie(specieUrl: String): Result<SpecieDto> {
         TODO("Not yet implemented")
     }
 
-    override suspend fun getFilm(filmUrl: String): Result<FilmResponse> {
+    override suspend fun getFilm(filmUrl: String): Result<FilmDto> {
         TODO("Not yet implemented")
     }
 }

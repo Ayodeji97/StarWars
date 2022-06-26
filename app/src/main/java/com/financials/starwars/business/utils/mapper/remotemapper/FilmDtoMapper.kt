@@ -11,9 +11,4 @@ class FilmDtoMapper : BaseDtoMapper<FilmDto, Film> {
             openingCrawl = type.openingCrawl
         )
 
-    override fun transformToDto(type: Film): FilmDto =
-        FilmDto(
-            title = type.title,
-            openingCrawl = type.openingCrawl
-        )
 }
