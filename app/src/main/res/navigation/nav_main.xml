@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_main"
+    app:startDestination="@id/characterSearchFragment">
+
+    <fragment
+        android:id="@+id/characterSearchFragment"
+        android:name="com.financials.starwars.presentation.charactersearch.CharacterSearchFragment"
+        android:label="CharacterSearchFragment"
+        tools:layout="@layout/fragment_characters_search"
+        >
+        <action
+            android:id="@+id/action_characterSearchFragment_to_characterDetailFragment"
+            app:destination="@id/characterDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/characterDetailFragment"
+        android:name="com.financials.starwars.presentation.characterdetail.CharacterDetailFragment"
+        android:label="CharacterDetailFragment"
+        tools:layout="@layout/fragment_character_detail"
+        >
+        <argument
+            android:name="character"
+            app:argType="com.financials.starwars.business.domain.model.Character" />
+        <action
+            android:id="@+id/action_characterDetailFragment_to_characterSearchFragment"
+            app:destination="@id/characterSearchFragment"
+            app:popUpToInclusive="true"
+            app:popUpTo="@id/characterSearchFragment"
+            />
+    </fragment>
+</navigation>
