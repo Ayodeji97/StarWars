@@ -5,8 +5,13 @@ import com.financials.starwars.business.datasource.remote.model.CharacterSearchD
 import com.financials.starwars.business.domain.model.Character
 
 sealed class CharacterSearchViewState {
+
     data class IsLoading(
-        val isLoading: Boolean
+        val isLoading: Boolean = false
+    ) : CharacterSearchViewState()
+
+    data class IsEmpty(
+        val isEmpty: Boolean = false
     ) : CharacterSearchViewState()
 
     data class Success(
@@ -16,4 +21,6 @@ sealed class CharacterSearchViewState {
     data class Error(
         val error: String
     ) : CharacterSearchViewState()
+
+
 }

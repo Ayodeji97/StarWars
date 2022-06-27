@@ -4,9 +4,7 @@ import com.financials.starwars.business.datasource.remote.StarWarsService
 import com.financials.starwars.business.datasource.remote.model.CharacterDto
 import com.financials.starwars.business.datasource.remote.model.FilmDto
 import com.financials.starwars.business.datasource.remote.model.PlanetDto
-import com.financials.starwars.business.datasource.remote.model.SpecieDto
 import com.financials.starwars.business.utils.Result
-import com.financials.starwars.business.utils.mapper.remotemapper.FilmDtoMapper
 import com.financials.starwars.di.dispatcher.IoDispatcher
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
@@ -15,7 +13,6 @@ import kotlin.Exception
 
 class CharacterDetailRemoteSourceImpl @Inject constructor(
     private val starWarsService: StarWarsService,
-    private val filmDtoMapper: FilmDtoMapper,
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher
 ) : CharacterDetailRemoteSource {
 
@@ -35,7 +32,6 @@ class CharacterDetailRemoteSourceImpl @Inject constructor(
 
         }
 
-
     override suspend fun getPlanet(planetUrl: String): Result<PlanetDto> =
         withContext(ioDispatcher) {
             return@withContext try {
@@ -51,25 +47,15 @@ class CharacterDetailRemoteSourceImpl @Inject constructor(
             }
         }
 
-
     override suspend fun getFilm(filmUrls: List<String>): Result<List<FilmDto>> =
         withContext(ioDispatcher) {
             return@withContext try {
-                val filmDetails : List<FilmDto> = filmUrls.map {url ->
+                val filmDetails: List<FilmDto> = filmUrls.map { url ->
                     starWarsService.getFilmDetail(url)
                 }
                 Result.Success(filmDetails)
-            }
-            catch (exception : Exception) {
+            } catch (exception: Exception) {
                 Result.Error(exception)
             }
         }
-
-
-
-    override suspend fun getSpecie(specieUrl: String): Result<SpecieDto> {
-        TODO("Not yet implemented")
-    }
-
-
 }

@@ -28,46 +28,47 @@ class CharacterDetailViewModel @Inject constructor(
     private val getPlanetUseCase: GetPlanetUseCase
 ) : ViewModel() {
 
-    private var _characterSearchViewState =
+    private var _characterViewState =
         MutableStateFlow<CharacterDetailViewState>(CharacterDetailViewState.IsLoading(false))
 
-    val characterSearchViewState = _characterSearchViewState.asStateFlow()
+    val characterSearchViewState = _characterViewState.asStateFlow()
 
     private var _filmViewState = MutableStateFlow<FilmViewState>(FilmViewState.IsLoading(false))
     val filmViewState = _filmViewState.asStateFlow()
 
-    private var _planetViewState = MutableStateFlow<PlanetViewState>(PlanetViewState.IsLoading(false))
+    private var _planetViewState =
+        MutableStateFlow<PlanetViewState>(PlanetViewState.IsLoading(false))
     val planetViewState = _planetViewState.asStateFlow()
 
 
     fun onTriggeredEvent(event: CharacterDetailViewEvent) {
         when (event) {
             is CharacterDetailViewEvent.GetCharacter -> {
+                _characterViewState.value = CharacterDetailViewState.IsLoading(true)
                 getCharacter(event.characterUrl)
             }
             is CharacterDetailViewEvent.GetPlanet -> {
+                _planetViewState.value = PlanetViewState.IsLoading(true)
                 getPlanet(event.planetUrl)
             }
-            is CharacterDetailViewEvent.GetFilm -> getFilm(event.filmUrl)
-
+            is CharacterDetailViewEvent.GetFilm -> {
+                _filmViewState.value = FilmViewState.IsLoading(true)
+                getFilm(event.filmUrl)
+            }
         }
     }
-
 
     private fun getCharacter(characterUrl: String) {
         viewModelScope.launch {
             getCharacterUseCase.invoke(characterUrl).collect {
                 when (it) {
-                    is Result.Loading -> {
-                        handleCharacterViewState(null, "", true)
-                    }
                     is Result.Success -> {
-                        handleCharacterViewState(it.data, "", false)
+                        handleCharacterViewState(it.data, "")
                     }
                     is Result.Error -> {
                         handleCharacterViewState(
                             null,
-                            it.exception.localizedMessage ?: Constants.UNABLE_TO_FETCH_DATA, false
+                            it.exception.localizedMessage ?: Constants.UNABLE_TO_FETCH_DATA
                         )
                     }
 
@@ -76,20 +77,17 @@ class CharacterDetailViewModel @Inject constructor(
         }
     }
 
-    private fun getPlanet (planetUrl : String) {
+    private fun getPlanet(planetUrl: String) {
         viewModelScope.launch {
             getPlanetUseCase.invoke(planetUrl).collectLatest {
-                when(it) {
-                    is Result.Loading -> {
-                        handlePlanetState(null, "", true)
-                    }
+                when (it) {
                     is Result.Success -> {
-                        handlePlanetState(it.data, "", false)
+                        handlePlanetState(it.data, "")
                     }
                     is Result.Error -> {
                         handlePlanetState(
                             null,
-                            it.exception.localizedMessage ?: Constants.UNABLE_TO_FETCH_DATA, false
+                            it.exception.localizedMessage ?: Constants.UNABLE_TO_FETCH_DATA
                         )
                     }
                 }
@@ -97,20 +95,22 @@ class CharacterDetailViewModel @Inject constructor(
         }
     }
 
-    private fun getFilm (filmUrl : List<String>) {
+    private fun getFilm(filmUrl: List<String>) {
         viewModelScope.launch {
             getFilmUseCase.invoke(filmUrl).collectLatest {
                 when (it) {
-                    is Result.Loading -> {
-                        handleFilmState(null, "", true)
-                    }
                     is Result.Success -> {
-                        handleFilmState(it.data, "", false)
+                        if (it.data.isNullOrEmpty()) {
+                            _filmViewState.value = FilmViewState.IsEmpty(true)
+                        } else {
+                            handleFilmState(it.data, "")
+                        }
+
                     }
                     is Result.Error -> {
                         handleFilmState(
                             null,
-                            it.exception.localizedMessage ?: Constants.UNABLE_TO_FETCH_DATA, false
+                            it.exception.localizedMessage ?: Constants.UNABLE_TO_FETCH_DATA,
                         )
                     }
                 }
@@ -118,32 +118,22 @@ class CharacterDetailViewModel @Inject constructor(
         }
     }
 
-    private fun handleCharacterViewState(
-        characterDetail: CharacterDetail?,
-        error: String,
-        isLoading: Boolean
-    ) {
-        _characterSearchViewState.value = CharacterDetailViewState.IsLoading(isLoading)
+    private fun handleCharacterViewState(characterDetail: CharacterDetail?, error: String) {
         try {
             if (characterDetail != null) {
-                _characterSearchViewState.value = CharacterDetailViewState.Success(characterDetail)
+                _characterViewState.value = CharacterDetailViewState.Success(characterDetail)
             } else {
-                _characterSearchViewState.value = CharacterDetailViewState.Success(null)
+                _characterViewState.value =
+                    CharacterDetailViewState.Error(error)
             }
         } catch (e: Exception) {
-            _characterSearchViewState.value =
+            _characterViewState.value =
                 CharacterDetailViewState.Error(e.localizedMessage ?: error)
         }
     }
 
-    private fun handleFilmState (
-        film: List<Film>?,
-        error: String,
-        isLoading: Boolean
-    ) {
-        _filmViewState.value = FilmViewState.IsLoading(isLoading)
+    private fun handleFilmState(film: List<Film>?, error: String) {
         try {
-            Log.i("Films", "Anyone $film")
             if (film != null) {
                 _filmViewState.value = FilmViewState.Success(film)
             } else {
@@ -155,9 +145,7 @@ class CharacterDetailViewModel @Inject constructor(
         }
     }
 
-    fun handlePlanetState (planet: Planet?,  error: String,
-                           isLoading: Boolean) {
-        _planetViewState.value = PlanetViewState.IsLoading(isLoading)
+    private fun handlePlanetState(planet: Planet?, error: String) {
         try {
             if (planet != null) {
                 _planetViewState.value = PlanetViewState.Success(planet)
@@ -169,6 +157,5 @@ class CharacterDetailViewModel @Inject constructor(
                 PlanetViewState.Error(e.localizedMessage ?: error)
         }
     }
-
 
 }

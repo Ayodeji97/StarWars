@@ -1,15 +1,18 @@
 package com.financials.starwars.presentation.charactersearch
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.financials.starwars.R
 import com.financials.starwars.databinding.FragmentCharactersSearchBinding
 import com.financials.starwars.presentation.adapter.characteradapter.CharacterSearchAdapter
 import com.financials.starwars.presentation.utils.afterTextChangedDelayed
@@ -23,7 +26,6 @@ class CharacterSearchFragment : Fragment() {
     private val ui get() = currentBinding!!
 
     private val characterSearchViewModel: CharacterSearchViewModel by viewModels()
-
     private lateinit var characterSearchAdapter: CharacterSearchAdapter
 
     override fun onCreateView(
@@ -39,10 +41,15 @@ class CharacterSearchFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         initRecyclerView()
-
         userSearchAction()
         subscribeObserver()
 
+        if (characterSearchAdapter.currentList.isEmpty()) {
+            ui.apply {
+                fragmentCharacterSearchErrorTv.visibility = View.VISIBLE
+                fragmentCharacterSearchErrorTv.text = getText(R.string.empty_list_str)
+            }
+        }
     }
 
     private fun initRecyclerView() {
@@ -55,6 +62,7 @@ class CharacterSearchFragment : Fragment() {
                 findNavController().navigate(action)
             }
         )
+
         ui.apply {
             recyclerViewCharacterSearch.apply {
                 adapter = characterSearchAdapter
@@ -68,21 +76,40 @@ class CharacterSearchFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             characterSearchViewModel.characterSearchViewState.collectLatest {
                 when (it) {
-                    is CharacterSearchViewState.IsLoading -> {
-                        ui.progressBar.isVisible = it.isLoading
+                    is CharacterSearchViewState.IsEmpty -> {
+                        ui.apply {
+                            progressBar.isVisible = false
+                            recyclerViewCharacterSearch.isVisible = false
+                            fragmentCharacterSearchErrorTv.visibility = View.VISIBLE
+                            fragmentCharacterSearchErrorTv.text =
+                                getText(R.string.search_not_found_str)
+                        }
                     }
-
+                    is CharacterSearchViewState.IsLoading -> {
+                        ui.apply {
+                            fragmentCharacterSearchErrorTv.visibility = View.INVISIBLE
+                            recyclerViewCharacterSearch.isVisible = false
+                            ui.progressBar.isVisible = it.isLoading
+                        }
+                    }
                     is CharacterSearchViewState.Success -> {
-                        ui.progressBar.isVisible = false
+                        ui.apply {
+                            recyclerViewCharacterSearch.isVisible = true
+                            fragmentCharacterSearchErrorTv.visibility = View.INVISIBLE
+                            ui.progressBar.isVisible = false
+                        }
                         characterSearchAdapter.submitList(it.charactersSearch)
                     }
 
                     is CharacterSearchViewState.Error -> {
                         ui.apply {
+                            progressBar.isVisible = false
+                            recyclerViewCharacterSearch.isVisible = false
                             fragmentCharacterSearchErrorTv.visibility = View.VISIBLE
                             fragmentCharacterSearchErrorTv.text = it.error
                         }
                     }
+
                 }
             }
         }
@@ -95,15 +122,21 @@ class CharacterSearchFragment : Fragment() {
                 userSearch
             )
         )
-        //
     }
 
     private fun userSearchAction() {
         ui.fragmentCharacterSearchEt.afterTextChangedDelayed {
+            ui.apply {
+                fragmentCharacterSearchErrorTv.visibility = View.INVISIBLE
+            }
             if (it.isNotBlank()) {
                 getCharacterSearch()
             } else {
                 characterSearchAdapter.submitList(emptyList())
+                ui.apply {
+                    fragmentCharacterSearchErrorTv.visibility = View.VISIBLE
+                    fragmentCharacterSearchErrorTv.text = getText(R.string.empty_list_str)
+                }
             }
         }
     }

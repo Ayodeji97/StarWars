@@ -9,14 +9,10 @@ import retrofit2.http.Url
 interface StarWarsService {
 
     @GET("people/")
-    suspend fun searchCharacters(@Query("search") params: String):
-            Response<CharacterSearchDto>
+    suspend fun searchCharacters(@Query("search") params: String): Response<CharacterSearchDto>
 
     @GET
     suspend fun getCharacterDetail(@Url url: String): Response<CharacterDto>
-
-    @GET
-    suspend fun getSpecieDetail(@Url url: String): Response<SpecieDto>
 
     @GET
     suspend fun getFilmDetail(@Url url: String): FilmDto

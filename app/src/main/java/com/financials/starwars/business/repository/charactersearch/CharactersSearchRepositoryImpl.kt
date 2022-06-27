@@ -16,9 +16,6 @@ class CharactersSearchRepositoryImpl @Inject constructor(
     override suspend fun charactersSearch(characterName: String): Flow<Result<List<Character>>> =
         flow {
             when (val response = characterSearchRemoteSource.charactersSearch(characterName)) {
-                is Result.Loading -> {
-                    emit(Result.Loading(true))
-                }
                 is Result.Success -> {
                     if (response.data != null) {
                         emit(Result.Success(characterDtoMapper.transformToDomain(response.data.results)))

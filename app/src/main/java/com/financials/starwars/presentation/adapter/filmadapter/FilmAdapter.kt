@@ -19,6 +19,4 @@ class FilmAdapter : ListAdapter<Film, FilmViewHolder>(FilmComparator()) {
             holder.bind(it)
         }
     }
-
-
 }
