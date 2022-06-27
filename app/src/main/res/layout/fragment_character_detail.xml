@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -24,7 +22,7 @@
         android:id="@+id/fragment_detail_img"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/margin_15"
+        android:layout_marginEnd="@dimen/margin_16"
         android:layout_marginTop="@dimen/margin_16"
         android:src="@drawable/star_wars_icon_50"
         app:layout_constraintEnd_toEndOf="parent"
@@ -60,7 +58,7 @@
         android:id="@+id/fragment_character_detail_cl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/general_all_card_white_color_drawable"
+        android:background="@drawable/all_curve_edge_gray_stroke"
         android:paddingBottom="@dimen/margin_10"
         android:layout_marginTop="@dimen/margin_15"
         android:layout_marginStart="@dimen/margin_15"
@@ -137,6 +135,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         >
 
+        <ProgressBar
+            android:id="@+id/planet_progress_bar"
+            android:layout_width="@dimen/margin_15"
+            android:layout_height="@dimen/margin_15"
+            android:backgroundTint="@color/primary_color"
+            android:progressBackgroundTint="@color/primary_color"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
         <TextView
             android:id="@+id/planet_name_tv"
             android:layout_width="wrap_content"
@@ -161,6 +171,20 @@
             app:layout_constraintStart_toStartOf="parent"
             />
 
+        <TextView
+            android:id="@+id/fragment_detail_planet_error_tv"
+            style="@style/PlaceholderTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:gravity="center"
+            android:lineSpacingMultiplier="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:text="Folden" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -178,6 +202,18 @@
         app:layout_constraintTop_toBottomOf="@+id/fragment_character_planet_cl" />
 
 
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="@dimen/margin_24"
+        android:layout_height="@dimen/margin_24"
+        android:backgroundTint="@color/primary_color"
+        android:visibility="gone"
+        android:progressBackgroundTint="@color/primary_color"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/recyclerView_character_search" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView_character_search"
         android:layout_width="wrap_content"
@@ -188,5 +224,19 @@
         android:layout_marginStart="@dimen/margin_15"
         android:layout_marginBottom="@dimen/margin_20"
         tools:listitem="@layout/film_list_item" />
+
+    <TextView
+        android:id="@+id/fragment_detail_film_error_tv"
+        style="@style/PlaceholderTextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:lineSpacingMultiplier="0.5"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fragment_character_detail_film_tv"
+        tools:text="Folden" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

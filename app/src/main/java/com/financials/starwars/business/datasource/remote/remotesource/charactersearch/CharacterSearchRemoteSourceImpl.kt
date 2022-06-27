@@ -6,13 +6,9 @@ import com.financials.starwars.business.datasource.remote.model.CharacterSearchD
 import com.financials.starwars.business.utils.Result
 import com.financials.starwars.di.dispatcher.IoDispatcher
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.withContext
-import timber.log.Timber
-import java.lang.Exception
 import javax.inject.Inject
+import kotlin.Exception
 
 class CharacterSearchRemoteSourceImpl @Inject constructor(
     private val starWarsService: StarWarsService,
@@ -22,9 +18,7 @@ class CharacterSearchRemoteSourceImpl @Inject constructor(
             withContext(ioDispatcher) {
                 return@withContext try {
                     val apiResponse = starWarsService.searchCharacters(characterName)
-                    Result.Loading(true)
                     if (apiResponse.isSuccessful) {
-                        Result.Loading(true)
                         val searchCharacters = apiResponse.body()
                         Result.Success(searchCharacters)
                     } else {
@@ -34,5 +28,4 @@ class CharacterSearchRemoteSourceImpl @Inject constructor(
                     Result.Error(exception)
                 }
             }
-
 }

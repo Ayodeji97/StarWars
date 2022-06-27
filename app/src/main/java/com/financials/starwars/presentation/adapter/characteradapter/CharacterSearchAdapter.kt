@@ -32,4 +32,6 @@ class CharacterSearchAdapter(
             holder.bind(it)
         }
     }
+
+
 }

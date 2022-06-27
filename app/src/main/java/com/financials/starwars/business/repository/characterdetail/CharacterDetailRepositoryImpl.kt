@@ -69,28 +69,4 @@ class CharacterDetailRepositoryImpl @Inject constructor(
                 }
             }
         }
-
-//    override suspend fun getFilm(filmUrl: List<String>): Flow<Result<List<Film>>> =
-//        flow {
-//            when (val response = characterDetailRemoteSource.getFilm(filmUrl)) {
-//                is Result.Success -> {
-//                    if (response.data != null) {
-//                        emit(Result.Success(filmDtoMapper.transformToDomain(response.data)))
-//                    } else {
-//                        emit(Result.Success(null))
-//                    }
-//                }
-//                is Result.Error -> {
-//                    Result.Error(response.exception)
-//                }
-//            }
-//        }
-
-
-
-    override suspend fun getSpecie(specieUrl: String): Flow<Result<SpecieDto>> {
-        TODO("Not yet implemented")
-    }
-
-
 }

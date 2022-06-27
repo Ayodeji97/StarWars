@@ -105,6 +105,11 @@ dependencies {
     def mockWebServer = "4.9.1"
     androidTestImplementation "com.squareup.okhttp3:mockwebserver:$mockWebServer"
     androidTestImplementation "io.mockk:mockk:1.10.5"
+    testImplementation "org.mockito:mockito-core:4.0.0"
+
+    testImplementation "com.squareup.okhttp3:mockwebserver:$mockWebServer"
+    testImplementation "io.mockk:mockk:1.10.5"
+
 
     def junit_version = "4.13.2"
     testImplementation "junit:junit:$junit_version"
@@ -140,6 +145,12 @@ dependencies {
     kaptAndroidTest 'com.google.dagger:hilt-android-compiler:2.38.1'
     androidTestImplementation "com.google.truth:truth:$truth_version"
     androidTestImplementation 'com.jakewharton.espresso:okhttp3-idling-resource:1.0.0'
+
+
+
+
+
+
 
 
 }
