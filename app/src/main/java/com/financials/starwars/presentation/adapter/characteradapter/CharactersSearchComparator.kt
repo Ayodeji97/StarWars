@@ -1,4 +1,4 @@
-package com.financials.starwars.presentation.adapter
+package com.financials.starwars.presentation.adapter.characteradapter
 
 import androidx.recyclerview.widget.DiffUtil
 import com.financials.starwars.business.datasource.remote.model.CharacterDto

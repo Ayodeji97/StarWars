@@ -4,4 +4,14 @@
     <string name="search_str">Search...</string>
     <string name="list_icon_str">List Icon</string>
     <string name="navigation_icon_str">Navigation Icon</string>
+    <string name="profile_str">PROFILE</string>
+    <string name="basic_profile_str">Basic Profile</string>
+    <string name="profile_name_str">NAME: %1$s</string>
+    <string name="profile_birth_year_str">BIRTH YEAR: %1$s</string>
+    <string name="profile_height_str">HEIGHT: %1$s CM, %2$.02f INCHES</string>
+    <string name="planet_str">Planet Info</string>
+    <string name="planet_name_str">NAME: %1$s</string>
+    <string name="planet_population_str">POPULATION: %1$s</string>
+    <string name="species_info_str">Species Info</string>
+    <string name="films_info_str">Films Info</string>
 </resources>

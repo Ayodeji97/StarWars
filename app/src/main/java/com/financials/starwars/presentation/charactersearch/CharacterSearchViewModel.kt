@@ -44,7 +44,7 @@ class CharacterSearchViewModel @Inject constructor(
         viewModelScope.launch {
             getCharacterSearchUseCase.invoke(characterName).collect {
                 when(it) {
-                    Result.Loading -> {
+                    is Result.Loading -> {
                         handleViewState(null, "", true)
                     }
                     is Result.Success -> {

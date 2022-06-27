@@ -6,6 +6,7 @@ import com.financials.starwars.business.datasource.remote.model.CharacterSearchD
 import com.financials.starwars.business.utils.Result
 import com.financials.starwars.di.dispatcher.IoDispatcher
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.withContext
@@ -21,7 +22,9 @@ class CharacterSearchRemoteSourceImpl @Inject constructor(
             withContext(ioDispatcher) {
                 return@withContext try {
                     val apiResponse = starWarsService.searchCharacters(characterName)
+                    Result.Loading(true)
                     if (apiResponse.isSuccessful) {
+                        Result.Loading(true)
                         val searchCharacters = apiResponse.body()
                         Result.Success(searchCharacters)
                     } else {

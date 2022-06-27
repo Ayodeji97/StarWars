@@ -11,9 +11,11 @@ interface CharacterDetailRemoteSource {
 
     suspend fun getCharacter(characterUrl: String): Result<CharacterDto>
 
+    suspend fun getFilm(filmUrls: List<String>): Result<List<FilmDto>>
+
     suspend fun getPlanet(planetUrl: String): Result<PlanetDto>
 
     suspend fun getSpecie(specieUrl: String): Result<SpecieDto>
 
-    suspend fun getFilm(filmUrl: String): Result<FilmDto>
+
 }

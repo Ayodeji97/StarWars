@@ -22,7 +22,13 @@
         tools:layout="@layout/fragment_character_detail"
         >
         <argument
-            android:name="characterUrl"
-            app:argType="string" />
+            android:name="character"
+            app:argType="com.financials.starwars.business.domain.model.Character" />
+        <action
+            android:id="@+id/action_characterDetailFragment_to_characterSearchFragment"
+            app:destination="@id/characterSearchFragment"
+            app:popUpToInclusive="true"
+            app:popUpTo="@id/characterSearchFragment"
+            />
     </fragment>
 </navigation>

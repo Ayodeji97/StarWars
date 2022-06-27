@@ -1,25 +1,20 @@
 package com.financials.starwars.presentation.charactersearch
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.activity.viewModels
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.financials.starwars.business.utils.Result
 import com.financials.starwars.databinding.FragmentCharactersSearchBinding
-import com.financials.starwars.presentation.adapter.CharacterSearchAdapter
+import com.financials.starwars.presentation.adapter.characteradapter.CharacterSearchAdapter
 import com.financials.starwars.presentation.utils.afterTextChangedDelayed
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
-import timber.log.Timber
 
 @AndroidEntryPoint
 class CharacterSearchFragment : Fragment() {
@@ -53,10 +48,9 @@ class CharacterSearchFragment : Fragment() {
     private fun initRecyclerView() {
         characterSearchAdapter = CharacterSearchAdapter(
             onCharacterClicked = { character ->
-                val characterUrl = character.url
                 val action =
                     CharacterSearchFragmentDirections.actionCharacterSearchFragmentToCharacterDetailFragment(
-                        characterUrl
+                        character
                     )
                 findNavController().navigate(action)
             }
@@ -101,6 +95,7 @@ class CharacterSearchFragment : Fragment() {
                 userSearch
             )
         )
+        //
     }
 
     private fun userSearchAction() {

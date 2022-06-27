@@ -1,7 +1,6 @@
-package com.financials.starwars.presentation.adapter
+package com.financials.starwars.presentation.adapter.characteradapter
 
 import androidx.recyclerview.widget.RecyclerView
-import com.financials.starwars.business.datasource.remote.model.CharacterDto
 import com.financials.starwars.business.domain.model.Character
 import com.financials.starwars.databinding.CharactersListItemBinding
 

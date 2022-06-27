@@ -4,6 +4,7 @@ import android.os.CountDownTimer
 import android.text.Editable
 import android.text.TextWatcher
 import android.widget.EditText
+import androidx.fragment.app.Fragment
 
 fun EditText.afterTextChangedDelayed(afterTextChanged: (String) -> Unit) {
     this.addTextChangedListener(object : TextWatcher {
@@ -23,4 +24,8 @@ fun EditText.afterTextChangedDelayed(afterTextChanged: (String) -> Unit) {
             }.start()
         }
     })
+}
+
+fun Fragment.heightConverterToInch(heightInCM : Int) : Double {
+    return heightInCM * 0.39
 }

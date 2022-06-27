@@ -1,6 +1,6 @@
-package com.financials.starwars.presentation.characterdetail
+package com.financials.starwars.presentation.characterdetail.viewstate
 
-import com.financials.starwars.business.datasource.remote.model.CharacterDto
+import com.financials.starwars.business.domain.model.CharacterDetail
 
 sealed class CharacterDetailViewState {
     data class IsLoading(
@@ -8,7 +8,7 @@ sealed class CharacterDetailViewState {
     ) : CharacterDetailViewState()
 
     data class Success(
-        val character: CharacterDto?
+        val character: CharacterDetail?
     ) : CharacterDetailViewState()
 
     data class Error(

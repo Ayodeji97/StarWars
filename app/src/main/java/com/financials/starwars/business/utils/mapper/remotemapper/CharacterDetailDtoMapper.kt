@@ -4,8 +4,9 @@ import com.financials.starwars.business.datasource.cache.model.CharacterDetailEn
 import com.financials.starwars.business.datasource.remote.model.CharacterDto
 import com.financials.starwars.business.domain.model.CharacterDetail
 import com.financials.starwars.business.utils.mapper.base.BaseDtoMapper
+import javax.inject.Inject
 
-class CharacterDetailDtoMapper : BaseDtoMapper<CharacterDto, CharacterDetail> {
+class CharacterDetailDtoMapper @Inject constructor() : BaseDtoMapper<CharacterDto, CharacterDetail> {
     override fun transformToDomain(type: CharacterDto): CharacterDetail =
         CharacterDetail(
             films = type.films,
