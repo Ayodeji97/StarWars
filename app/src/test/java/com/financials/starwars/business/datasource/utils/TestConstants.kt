@@ -10,4 +10,5 @@ object TestConstants {
     const val SEARCH_SIZE = 6
     const val REQUEST_PATH = "/people/"
     const val NO_RESULT_SEARCH_QUERY = "Daniel"
+    const val TEST_ERROR = "Error occur"
 }
