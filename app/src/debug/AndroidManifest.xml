@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.financials.starwars">
+
+
+
+    <application
+       >
+        <activity
+            android:name=".playground.HiltTestActivity"
+            tools:node="replace"
+            tools:replace="android:launchMode"
+            android:launchMode="standard"
+            android:exported="true">
+        </activity>
+    </application>
+
+</manifest>
