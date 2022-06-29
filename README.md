@@ -4,7 +4,8 @@ Hey there 👋🏼👋🏼👋🏼 !
 StarWars App is a simple android application developed to demonstrate clean architectural guidelines with MVI android architecture.
 
 StarWars Application is under development.
-_Note: StarWars Application data source is from star wars api and not cache implement. See API Documentation [Here]("https://swapi.dev/documentation#android")_
+_Note: StarWars Application data source is from star wars api and not cache implement.
+See API Documentation [Here]("https://swapi.dev/documentation#android")_
 
 ## Feature
 * Clean Architecture With MVI
