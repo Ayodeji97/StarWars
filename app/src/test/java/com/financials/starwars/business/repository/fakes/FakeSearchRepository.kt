@@ -1,4 +1,4 @@
-package com.financials.starwars.business.repository
+package com.financials.starwars.business.repository.fakes
 
 import com.financials.starwars.business.datasource.utils.DummyData
 import com.financials.starwars.business.datasource.utils.TestConstants.TEST_ERROR
@@ -9,14 +9,13 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 
 
-
 class FakeSearchRepository : CharactersSearchRepository {
 
     val error_text = TEST_ERROR
     val exception = Exception(error_text)
 
 
-    private var charactersSearchFlowResult : Flow<Result<List<Character>>> =
+    private var charactersSearchFlowResult: Flow<Result<List<Character>>> =
         flowOf(Result.Success(listOf(DummyData.character)))
 
 
@@ -26,8 +25,8 @@ class FakeSearchRepository : CharactersSearchRepository {
             charactersSearchFlowResult = createResponse(value)
         }
 
-    private fun createResponse (responseState: ResponseState) : Flow<Result<List<Character>>> {
-        return when(responseState) {
+    private fun createResponse(responseState: ResponseState): Flow<Result<List<Character>>> {
+        return when (responseState) {
             ResponseState.DATA -> flowOf(Result.Success(listOf(DummyData.character)))
             ResponseState.EMPTY -> flowOf(Result.Success(listOf()))
             ResponseState.ERROR -> flowOf(Result.Error(exception))

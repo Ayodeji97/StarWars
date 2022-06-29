@@ -5,6 +5,9 @@ import com.financials.starwars.business.datasource.utils.MainCoroutineRule
 import com.financials.starwars.business.domain.model.Character
 import com.financials.starwars.business.repository.charactersearch.CharactersSearchRepository
 import com.financials.starwars.business.repository.charactersearch.CharactersSearchRepositoryImpl
+import com.financials.starwars.business.repository.fakes.FakeRemoteSource
+import com.financials.starwars.business.repository.fakes.FakeSearchRepository
+import com.financials.starwars.business.repository.fakes.ResponseState
 import com.financials.starwars.business.utils.Result
 import com.financials.starwars.business.utils.mapper.remotemapper.CharacterDtoMapper
 import com.google.common.truth.Truth.assertThat
