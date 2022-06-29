@@ -1,4 +1,4 @@
-package com.financials.starwars.business.repository.fakes
+package com.financials.starwars.business.repository.fakes.fakesearch
 
 import com.financials.starwars.business.datasource.remote.model.CharacterSearchDto
 import com.financials.starwars.business.datasource.remote.remotesource.charactersearch.CharacterSearchRemoteSource

@@ -2,19 +2,13 @@ package com.financials.starwars.presentation.charactersearch
 
 import android.os.Build
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.financials.starwars.business.datasource.utils.DummyData
 import com.financials.starwars.business.datasource.utils.MainCoroutineRule
 import com.financials.starwars.business.domain.interactor.GetCharacterSearchUseCase
-import com.financials.starwars.business.domain.model.Character
-import com.financials.starwars.business.repository.charactersearch.CharactersSearchRepository
-import com.financials.starwars.business.repository.fakes.FakeCharacterSearchUseCase
-import com.financials.starwars.business.repository.fakes.FakeSearchRepository
+import com.financials.starwars.business.repository.fakes.fakesearch.FakeSearchRepository
 import com.financials.starwars.business.utils.Result
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.launch
@@ -24,7 +18,6 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
-import org.mockito.Mockito
 import org.mockito.Mockito.`when`
 import org.mockito.Mockito.mock
 import org.mockito.junit.MockitoJUnitRunner

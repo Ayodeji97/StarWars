@@ -1,4 +1,4 @@
-package com.financials.starwars.business.repository.fakes
+package com.financials.starwars.business.repository.fakes.fakesearch
 
 import com.financials.starwars.business.domain.model.Character
 import com.financials.starwars.business.utils.Result

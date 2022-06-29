@@ -1,4 +1,4 @@
-package com.financials.starwars.business.repository.fakes
+package com.financials.starwars.business.repository.fakes.fakesearch
 
 import com.financials.starwars.business.datasource.utils.DummyData
 import com.financials.starwars.business.datasource.utils.TestConstants.TEST_ERROR

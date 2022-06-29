@@ -2,6 +2,8 @@ package com.financials.starwars.business.datasource.utils
 
 import com.financials.starwars.business.datasource.remote.model.CharacterDto
 import com.financials.starwars.business.datasource.remote.model.CharacterSearchDto
+import com.financials.starwars.business.datasource.remote.model.FilmDto
+import com.financials.starwars.business.datasource.remote.model.PlanetDto
 import com.financials.starwars.business.domain.model.Character
 import com.financials.starwars.business.domain.model.CharacterDetail
 import com.financials.starwars.business.domain.model.Film
@@ -10,6 +12,8 @@ import com.financials.starwars.business.domain.model.Planet
 object DummyData {
 
     const val name = "flmslm"
+    const val characterUrl = "https://swapi.dev/test/100"
+
 
     val characterDto = CharacterDto(
         name = "Angel Great",
@@ -52,7 +56,17 @@ object DummyData {
         population = "345000"
     )
 
+    val planetDto = PlanetDto(
+        name = "Ade John",
+        population = "560000"
+    )
+
     val film = Film(
+        title = "Sangotedo",
+        openingCrawl = "Once on upon a time, I can't do all this"
+    )
+
+    val filmDto = FilmDto(
         title = "Sangotedo",
         openingCrawl = "Once on upon a time, I can't do all this"
     )
