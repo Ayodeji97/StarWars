@@ -45,6 +45,12 @@ _Instruction to run the project_
 * [Robolectric](http://robolectric.org/) - Unit test on android framework.
 * [Espresso](https://developer.android.com/training/testing/espresso) - Test framework to write UI Tests
 
+# Screen Shots
+<p float="left">
+  <img src="app/src/main/res/drawable/starwars_first.jpeg" width="150" />
+  <img src="app/src/main/res/drawable/starwars_second.jpeg" width="150" />
+</p>
+
 # Author
 **Daniel Ayodeji**
 
