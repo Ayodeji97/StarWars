@@ -47,7 +47,7 @@ _Instruction to run the project_
 
 # Screen Shots
 <p float="left">
-  <img src="app/src/main/res/drawable/starwars_first.jpeg" width="150" />
+  <img src="app/src/main/res/drawable/starwar_first.jpeg" width="150" />
   <img src="app/src/main/res/drawable/starwars_second.jpeg" width="150" />
 </p>
 
